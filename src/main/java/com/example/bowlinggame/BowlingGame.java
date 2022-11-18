@@ -1,26 +1,19 @@
 package com.example.bowlinggame;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BowlingGame {
 
-    private List<Integer> rollsArrayList = new ArrayList<>();
-
-    public void roll(List<Integer> rollsArrayList) {
-        this.rollsArrayList = rollsArrayList;
-    }
-
-    public int score() {
+    public int score(List<Integer> rollsArrayList) {
         int score = 0;
         int cursor = 0;
 
         for (int frame = 0; frame < 10; frame++) {
-            if (isStrike(cursor)) {
+            if (isStrike(rollsArrayList, cursor)) {
                 score += 10 + rollsArrayList.get(cursor + 1) + rollsArrayList.get(cursor + 2);
                 cursor++;
             }
-            else if (isSpare(cursor)) {
+            else if (isSpare(rollsArrayList, cursor)) {
                 score += 10 + rollsArrayList.get((cursor + 2));
                 cursor += 2;
             }
@@ -32,11 +25,11 @@ public class BowlingGame {
         return score;
     }
 
-    public boolean isStrike(int cursor) {
+    public boolean isStrike(List<Integer> rollsArrayList, int cursor) {
         return rollsArrayList.get(cursor) == 10;
     }
 
-    public boolean isSpare(int cursor) {
+    public boolean isSpare(List<Integer> rollsArrayList, int cursor) {
         return rollsArrayList.get(cursor) + rollsArrayList.get(cursor + 1) == 10;
     }
 }
