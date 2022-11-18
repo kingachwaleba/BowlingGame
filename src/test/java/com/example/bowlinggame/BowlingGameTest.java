@@ -20,25 +20,37 @@ public class BowlingGameTest {
 
     @Test
     public void score_returnsZero_ifAllZeros() {
-        assertEquals(0, bowlingGame.score(
-                new ArrayList<>(Arrays.asList(0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0))));
+        bowlingGame.setRollsArrayList(new ArrayList<>(Arrays.asList(0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0)));
+        assertEquals(0, bowlingGame.score());
     }
 
     @Test
     public void score_returns300_ifPerfectGame() {
-        assertEquals(300, bowlingGame.score(
-                new ArrayList<>(Arrays.asList(10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10))));
+        bowlingGame.setRollsArrayList(new ArrayList<>(Arrays.asList(10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10)));
+        assertEquals(300, bowlingGame.score());
     }
 
     @Test
     public void score_returns72_ifOneStrike() {
-        assertEquals(72, bowlingGame.score(
-                new ArrayList<>(Arrays.asList(5,2, 10, 7,1, 0,8, 3,2, 9,0, 6,2, 1,2, 1,1, 4,0))));
+        bowlingGame.setRollsArrayList(new ArrayList<>(Arrays.asList(5,2, 10, 7,1, 0,8, 3,2, 9,0, 6,2, 1,2, 1,1, 4,0)));
+        assertEquals(72, bowlingGame.score());
     }
 
     @Test
     public void score_returns71_ifOneSpare() {
-        assertEquals(71, bowlingGame.score(
-                new ArrayList<>(Arrays.asList(5,2, 4,6, 7,1, 0,8, 3,2, 9,0, 6,2, 1,2, 1,1, 4,0))));
+        bowlingGame.setRollsArrayList(new ArrayList<>(Arrays.asList(5,2, 4,6, 7,1, 0,8, 3,2, 9,0, 6,2, 1,2, 1,1, 4,0)));
+        assertEquals(71, bowlingGame.score());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void score_throwsIllegalArgumentException_ifOneRollLessThanZero() {
+        bowlingGame.setRollsArrayList(
+                new ArrayList<>(Arrays.asList(5,2, 4,6, -7,1, 0,8, 3,2, 9,0, 6,2, 1,2, 1,1, 4,0)));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void score_throwsIllegalArgumentException_ifOneRollIsGreaterThanTen() {
+        bowlingGame.setRollsArrayList(
+                new ArrayList<>(Arrays.asList(5,2, 4,6, 11,1, 0,8, 3,2, 9,0, 6,2, 1,2, 1,1, 4,0)));
     }
 }
