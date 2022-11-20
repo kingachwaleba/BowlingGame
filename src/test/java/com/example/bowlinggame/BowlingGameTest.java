@@ -42,6 +42,12 @@ public class BowlingGameTest {
         assertEquals(71, bowlingGame.score());
     }
 
+    @Test
+    public void score_returns61_ifNotSpareOrStrike() {
+        bowlingGame.setRollsArrayList(new ArrayList<>(Arrays.asList(5,2, 4,3, 7,1, 0,8, 3,2, 9,0, 6,2, 1,2, 1,1, 4,0)));
+        assertEquals(61, bowlingGame.score());
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void score_throwsIllegalArgumentException_ifOneRollLessThanZero() {
         bowlingGame.setRollsArrayList(
